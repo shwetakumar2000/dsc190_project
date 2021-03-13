@@ -192,7 +192,7 @@ def get_daily_k(id=-1):
 # # Data Analysis: using the above functions for building portfolios
 
 # %%
-timedf,j,k = generate_daily_timetable(j=20, k=20) # with j as 3 and k as 2
+timedf,j,k = generate_daily_timetable(j=10, k=10) # NOTE: CHANGE THESE VALUES TO CHANGE THE J?K OUTPUT
 timedf
 
 
@@ -226,7 +226,7 @@ loser_tickers
 
 # %%
 # equally weight
-weights = np.ones(get_percents(n))/(get_percents(n))
+weights = np.ones(get_percents(n))/(get_percents(n)) # NOTE AMIR HERE IT IS
 
 
 # %%
@@ -285,7 +285,7 @@ def get_portfolio_performance(period=0, n=2, weights=None, hold=False):
     eval_df = get_cum_return(get_k_df(period)) if hold else get_cum_return(get_daily_j(period))# we get the return from the hold period
     
     weights = np.ones(get_percents(n))/(get_percents(n)) if not weights else weights # set weights
-    print('weights', len(weights))
+    # print('weights', len(weights))
     winner_eval = eval_df.loc[winner_tickers] # first the winners
     winner_eval = winner_eval.pivot_table(index='Date',columns='Name')['pct_change'].fillna(0)
     winner_performance = (winner_eval.dot(weights)+1).cumprod() - 1 # cumulative return
