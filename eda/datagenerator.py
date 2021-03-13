@@ -300,7 +300,7 @@ get_portfolio_performance()
 
 
 # %%
-get_portfolios(1)
+# get_portfolios(1)
 
 
 # %%
