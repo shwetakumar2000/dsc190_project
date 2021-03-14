@@ -192,7 +192,7 @@ def get_daily_k(id=-1):
 # # Data Analysis: using the above functions for building portfolios
 
 # %%
-timedf,j,k = generate_daily_timetable(j=10, k=10) # NOTE: CHANGE THESE VALUES TO CHANGE THE J?K OUTPUT
+timedf,j,k = generate_daily_timetable(j=30, k=60) # NOTE: CHANGE THESE VALUES TO CHANGE THE J?K OUTPUT
 timedf
 
 
@@ -296,7 +296,7 @@ def get_portfolio_performance(period=0, n=2, weights=None, hold=False):
 
     output = pd.DataFrame({'winners': winner_performance, 'losers': loser_performance})
     return output
-get_portfolio_performance()
+# get_portfolio_performance()
 
 
 # %%
@@ -368,6 +368,9 @@ sp500 = spc.merge(dpf, how='left', left_index=True, right_on='Date')
 # ax.legend(["Momentum", "Reversal", "S&P500"])
 # fig.savefig('performance.png')
 
+changes= sp500[['index','mom_pct_change', 'rev_pct_change','pctc']].rename(columns={'pctc':'SP500_pct_change'}).dropna()
+changes.to_csv('daily_j'+str(j)+'_k'+str(k)+'_pct.csv')
+changes
 
 # %%
 sp500 = sp500.drop(['mom_return', 'rev_return'], axis=1) # mom_retunr and rev_return, beware of use
